@@ -4,6 +4,7 @@ var passport = require('passport');
 var path = require('path');
 
 router.get("/", function(req,res,next){
+    console.log(req.session);
    res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
