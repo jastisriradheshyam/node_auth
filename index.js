@@ -1,5 +1,6 @@
 const express = require('express');
-var session = require('express-session');
+// var session = require('express-session');
+var { session, sessionStore } = require('./utils/session');
 var passport = require('passport');
 var bodyParser = require('body-parser')
 
@@ -20,8 +21,11 @@ app.use(bodyParser.json())
 
 // ***** session and auth [ start ] *****
 app.use(session({
+    // name: 'key',
     secret: 'secret',
-    resave: true,
+    store: sessionStore,
+    resave: false,
+    // rolling: true,
     saveUninitialized: false,
     cookie: { maxAge: 600000, secure: false }
 }));

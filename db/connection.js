@@ -12,7 +12,7 @@ const sqlOptions = {
     multipleStatements: true,
     supportBigNumbers: true,
     bigNumberStrings: true,
-    // debug: false
+    debug: true
 }
 
 try {
