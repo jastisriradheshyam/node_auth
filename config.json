@@ -1,7 +1,8 @@
 {
-    "db_host":"localhost",
-    "db_user":"root",
-    "db_port":3306,
-    "db_password":"password",
-    "db_name":"user_test"
+    "db_host": "localhost",
+    "db_user": "root",
+    "db_port": 3306,
+    "db_password": "root",
+    "db_name": "user_test",
+    "JWTSecret": "secret"
 }

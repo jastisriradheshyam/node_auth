@@ -1,5 +1,4 @@
 var mysql = require('mysql');
-var config = require('../config.json');
 
 var pool;
 const sqlOptions = {

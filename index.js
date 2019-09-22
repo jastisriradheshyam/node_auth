@@ -1,14 +1,21 @@
+// ***** config [ start ] *****
+require('./utils/setConfig');
+// ***** config [ end ] *****
+
 const express = require('express');
-// var session = require('express-session');
 var { session, sessionStore } = require('./utils/session');
 var passport = require('passport');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
-// auth setup
+// passport auth setup
 require('./utils/user_auth');
 
-var router = require('./routes/router');
+// ***** router imports [ start ] *****
+var sessionRouter = require('./routes/session_router');
+var APIRouter = require('./routes/api_router');
+// ***** router imports [ end ] *****
 
+// instantiating express app
 const app = express();
 
 // ***** body parsing [ start ] *****
@@ -18,6 +25,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 // ***** body parsing [ end ] *****
+
+// ***** API [ start ] *****
+app.use((req, res, next) => {
+    console.log(req.originalUrl);
+    next();
+})
+app.use("/api", APIRouter);
+// ***** API [ end ] *****
 
 // ***** session and auth [ start ] *****
 app.use(session({
@@ -35,10 +50,9 @@ app.use('/logout', (req, res, next) => {
     req.logOut();
     res.send("logged out");
 })
-// ***** session and auth [ end ] *****
-
 // setting router
-app.use(router);
+app.use(sessionRouter);
+// ***** session and auth [ end ] *****
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
